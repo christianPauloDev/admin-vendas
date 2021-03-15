@@ -36,6 +36,9 @@ if (file_exists('autoload.php')) {
 }
 ```
 
+#### Conferir se seu domínio está listado em `api-backend/Classes/Validator/XSSSecurityAccessOrigin.php`
+linha 18
+
 ## Login no [ADMIN](http://adminvendas.2dmedia.com.br/api-front/empresa/)
 
 Usuário : empresa  
