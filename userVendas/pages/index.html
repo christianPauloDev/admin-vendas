@@ -1,0 +1,242 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Projeto Vendas</title>
+    <meta name="description" content="Live Preview Of Oswan eCommerce HTML5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <!-- all css here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/chosen.min.css">
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/icofont.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bundle.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/loading.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body style="background-color: #fafafa;">
+    <div class="wrapper">
+        <header>
+            <div class="header-area ptb-30 mb-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-4">
+                            <div class="logo-small-device">
+                                <a href="index.html"><img alt="" src="assets/img/logo/2.png"></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-8">
+                            <div class="header-contact-menu-wrapper pl-45">
+                                <div class="header-contact">
+                                    <p>FALE CONOSCO (85) 98875-9706</p>
+                                </div>
+                                <div class="menu-wrapper text-center">
+                                    <button class="menu-toggle">
+                                        <img class="s-open" alt="" src="assets/img/icon-img/menu-2.png">
+                                        <img class="s-close" alt="" src="assets/img/icon-img/menu-close-2.png">
+                                    </button>
+                                    <div class="main-menu">
+                                        <nav>
+                                            <ul>
+                                                <li><a href="">home</a></li>
+                                                <li class="active"><a href="">Sobre </a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mobile-menu-area col-12">
+                            <div class="mobile-menu">
+                                <nav id="mobile-menu-active">
+                                    <ul class="menu-overflow">
+                                        <li><a href="">HOME</a></li>
+                                        <li><a href="">Sobre</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- checkout-area start -->
+        <div class="checkout-area mt-130">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <div class="ui icon input mb-3">
+                            <input type="text" id="pesquisar_produto" placeholder="Digite o que você deseja...">
+                            <i class="icon" style="margin: 15px 15px auto;"><i class="fa fa-search"></i></i>
+                        </div>
+
+                        <div id="card_produtos">
+                            <div class="text-center">
+                                <div class="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="your-order">
+                            <h3>Carrinho</h3>
+                            <div id="produtos_carrinho"></div>
+                            <div class="border-bottom text-dark pt-2 pb-2">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control form-control-sm"
+                                        placeholder="Cupom de desconto" id="cupom_pesquisa">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-danger" id="btn-cupom_pesquisa" value='1'
+                                            type="button"><i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id='carregamento'>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div id='erro_cupom'></div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <span>Subtotal</span>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                                        <span id="subtotal_pedido">R$ 0,00</span>
+                                        <input type="hidden" id="vdd_subtotal_pedido" value="0">
+                                    </div>
+                                </div>
+                                <div class="row hide" id="div-cupom">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <span>Cupom</span>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                                        <span id="desconto_pedido"> -R$ 0,00</span>
+                                        <input type="hidden" id="vdd_desconto_pedido" value="0">
+                                    </div>
+                                </div>
+                                <div class="row hide" id='div-frete'>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <span>Frete</span>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                                        <span id='frete'></span>
+                                        <input type="hidden" id="vdd_frete" value="0">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <h6 class="text-danger font-weight-boldi">Total</h6>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                                        <h6 class="text-danger font-weight-boldi" id="total_pedido">R$ 0,00</h6>
+                                    </div>
+                                </div>
+                                <div class="text-center mb-2">
+                                    <button class="btn btn-link text-danger font-weight-boldi"
+                                        onclick="removerTodosProdutos()">
+                                        <i class="fa fa-trash"></i> Limpar Carrinho
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button id="finalizar">Finalizar Pedido</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- Modal do Grupo Adicional -->
+    <div class="modal fade" id="modal_adicional" tabindex="-1" role="dialog" aria-labelledby="modal_adicional"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title mb-0 mt-0" id="modal_adicional_titulo"></h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img class="img-fluid img-thumbnail img-details-product mb-2" id="img_modal" src="" alt="">
+                    </div>
+                    <span class="mb-2 d-block" id="description_modal"></span>
+                    <label for="observacao">Observações</label>
+                    <textarea id="observacao" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-danger"
+                            onclick="buttonAlterarQuantidade('#qtd_produto', 'remove')">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-dark" disabled id='qtd_produto'>0</button>
+                        <button type="button" class="btn btn-outline-success"
+                            onclick="buttonAlterarQuantidade('#qtd_produto', 'add')">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-subtotal" id="btn-add_produto_carrinho">
+                        Adicionar <span id="preco_add_selecionados">0,00</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- all js here -->
+    <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script src="js/util/funcoes.js"></script>
+    <script src="js/util/constantes.js"></script>
+    <script src="js/util/html_paginas.js"></script>
+    <script src="js/listar.js"></script>
+    <script src="js/carrinho.js"></script>
+
+    <script>
+        if (screen.width < 767.98) {
+            $("#juncao").click(function () {
+                console.log("Deu certo");
+            });
+        } else {
+            console.log("Tamanho maior");
+        }
+    </script>
+</body>
+
+</html>

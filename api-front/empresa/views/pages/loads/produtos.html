@@ -1,0 +1,305 @@
+<div class="box-icone-carregando" style="display: none;">
+    <i class="fas fa-spinner fa-spin fa-5x fa-fw icone-carregando"></i>
+</div>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4 border-left-danger">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-sm-6 col-6">
+                <h5 class="m-0 mt-2 font-weight-bold text-danger"> <i class="fas fa-clipboard-list"></i> Produtos</h5>
+            </div>
+            <div class="col-sm-6 col-6">
+                <button class="btn btn-success float-right font-weight-bold" data-toggle="modal" id="btn_add"
+                    data-target="#modal_cadastro">
+                    <i class="fas fa-plus" id="icon_add"></i> <span id="label_add">Adicionar Produto </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <button class="btn btn-danger btn-sm mb-4" value="mostrar" id="btn-filtros">
+            <i class="fas fa-filter" id="i-filtros"></i> Filtros
+        </button>
+        <div class="form-row mb-4" id="filtros" style="display: none;">
+            <div class="col-3">
+                <label class="form-label-sm text-danger" for="filtro_categoria"><i class="fas fa-tags"></i>
+                    Categoria:</label>
+                <select class="custom-select custom-select-sm select_categorias" id="filtro_categoria">
+                </select>
+            </div>
+            <div class="col-2 ml-4">
+                <label class="form-label-sm text-danger" for="filtro_status"><i class="fas fa-star-half-alt"></i>
+                    Status:</label>
+                <select class="custom-select custom-select-sm" id="filtro_status">
+                    <option value="" selected>Todos</option>
+                    <option value="disponível">Disponível</option>
+                    <option value="esgotado">Esgotado</option>
+                    <option value="indisponível">Indisponível</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class='text-right'>#</th>
+                        <th>Imagem</th>
+                        <th>Categoria</th>
+                        <th>Produto</th>
+                        <th class='text-right'>Preço</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_produtos">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--Modal - Cadastrar -->
+<div class="modal fade" id="modal_cadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-danger">
+                <h5 class="modal-title text-white font-weight-bold">
+                    <i class="fas fa-clipboard-list"></i> Adicionar Produto
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-white" aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome_produto" class="form-label"><i class="fas fa-tag"></i> Nome: </label>
+                        <input id="nome_produto" type="text" class="form-control">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="id_categoria"><i class="fas fa-clipboard-list"></i>
+                            Categoria:</label>
+                        <select class="custom-select select_categorias" id="id_categoria">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="img"><i class="fas fa-image"></i> Imagem: </label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input id="img" type="file" class="custom-file-input" onchange="validarImagem()">
+                                <label class="custom-file-label" id="label_img">
+                                    <i class="fas fa-upload"></i> Escolher Arquivo
+                                </label>
+                            </div>
+                            <div class="input-group-append">
+                                <button type='button' title="Escolher outro arquivo" class='btn btn-danger'
+                                    style='display: none;' id="btn-limpar" onclick="limpar_arquivo()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="preco"><i class="fas fa-dollar-sign"></i> Preço:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                            <input id="preco" type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="status"><i class="fas fa-star-half-alt"></i> Status:</label>
+                        <select class="custom-select" id="status">
+                            <option disabled selected value="">Selecione o Status</option>
+                            <option value="disponível">Disponível</option>
+                            <option value="esgotado">Esgotado</option>
+                            <option value="indisponível">Indisponível</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="descricao"><i class="fas fa-align-left"></i> Descrição:</label>
+                        <textarea id="descricao" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer mb-0 pb-0">
+                    <button class="btn btn-secondary font-weight-bold" type="button" data-dismiss="modal"> <i
+                            class="fas fa-times"></i> Cancelar</button>
+                    <button class="btn btn-success font-weight-bold" id="cadastrar_produto">
+                        <i class="fas fa-plus" id="icone_cadastrar"></i> Adicionar Produto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fim do Modal -->
+
+<!--Modal - Editar -->
+<div class="modal fade" id="modal_edicao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-danger">
+                <h5 class="modal-title text-white font-weight-bold">
+                    <i class="fas fa-edit"></i> Editar Produto
+                </h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-white" aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="novo_nome_produto" class="form-label"><i class="fas fa-tag"></i> Nome: </label>
+                        <input id="novo_nome_produto" type="text" class="form-control">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="novo_id_categoria"><i class="fas fa-clipboard-list"></i>
+                            Categoria:</label>
+                        <select class="custom-select select_categorias" id="novo_id_categoria_fk">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="novo_img"><i class="fas fa-image"></i> Imagem: </label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input id="novo_img" type="file" class="custom-file-input"
+                                    onchange="validarImagem('novo_')">
+                                <label class="custom-file-label" id="novo_label_img">
+                                    <i class="fas fa-upload"></i> Escolher Arquivo
+                                </label>
+                            </div>
+                            <div class="input-group-append">
+                                <button type='button' title="Escolher outro arquivo" class='btn btn-danger'
+                                    style='display: none;' id="novo_btn-limpar" onclick="limpar_arquivo('novo_')">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="novo_preco"><i class="fas fa-dollar-sign"></i> Preço:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                            <input id="novo_preco" type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="novo_status"><i class="fas fa-star-half-alt"></i> Status:</label>
+                        <select class="custom-select" id="novo_status">
+                            <option value="" disabled>Selecione o Status</option>
+                            <option value="disponível">Disponível</option>
+                            <option value="esgotado">Esgotado</option>
+                            <option value="indisponível">Indisponível</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="novo_descricao"><i class="fas fa-align-left"></i> Descrição:</label>
+                        <textarea id="novo_descricao" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary font-weight-bold" type="button" data-dismiss="modal"> <i
+                        class="fas fa-times"></i> Cancelar</button>
+                <button class="btn btn-success font-weight-bold" id="editar_produto">
+                    <i class="fas fa-edit" id="icone_edicao"></i> Editar Produto
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fim do Modal -->
+
+<!-- MODAL DE DELETAR
+<div class="modal fade" id="modal_delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-danger">
+                <h6 class="modal-title text-white font-weight-bold"> <i class="fas fa-trash"></i> Você realmente deseja
+                    deletar esse Produto?</h6>
+            </div>
+            <div class="modal-body">
+                <h7><strong>Todas as informações relacionadas a esse produto </strong> serão deletadas!</h7>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal"
+                    aria-label="Close"> <i class="fas fa-times"></i> Cancelar</button>
+                <button type="button" class="btn btn-success font-weight-bold" id="deletar"> <i id="icone_deletar"
+                        class="fas fa-check"></i> Deletar</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- MODAL DE DELETAR -->
+<div class="modal fade" id="modal_delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-4 text-center">
+                <!-- ICON -->
+                <div class="icon-box mb-4">
+                    <i class="fas fa-trash"></i>
+                </div>
+                <!-- TITULO -->
+                <h4 class="modal-title mb-3">
+                    Você tem certeza?
+                </h4>
+
+                <!-- SUBTITULO -->
+                <h6 class="mb-4"><strong>Todas as informações</strong> relacionadas a esse produto serão deletadas!
+                </h6>
+
+                <!-- BOTÕES -->
+                <button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal"
+                    aria-label="Close">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="button" class="btn btn-danger font-weight-bold" id="deletar">
+                    <i id="icone_deletar" class="fas fa-check"></i> Deletar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+
+<script src="views/js/produtos/listar.js"></script>
+<script src="views/js/produtos/deletar.js"></script>
+<script src="views/js/produtos/cadastrar.js"></script>
+<script src="views/js/produtos/atualizar.js"></script>
+
+<!-- Page level plugins -->
+<script src="views/js/util/mascaras_inputs.js"></script>
+<script src="../template/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
